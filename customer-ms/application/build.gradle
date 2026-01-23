@@ -12,6 +12,9 @@ dependencies {
     // Dependencias de módulos internos
     implementation project(':customer-ms:domain')
     implementation project(':customer-ms:infrastructure:adapter')
+    implementation libs.bundles.spring.web
+    implementation 'com.h2database:h2'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 springBoot {
