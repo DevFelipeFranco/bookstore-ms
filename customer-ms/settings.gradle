@@ -1,0 +1,6 @@
+rootProject.name = 'customer-ms'
+
+include ':customer-ms:domain'
+include ':customer-ms:application'
+include ':customer-ms:infrastructure:persistence'
+include ':customer-ms:infrastructure:adapter'

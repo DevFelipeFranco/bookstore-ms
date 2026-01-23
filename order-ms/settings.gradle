@@ -1,0 +1,6 @@
+rootProject.name = 'order-ms'
+
+include ':order-ms:domain'
+include ':order-ms:application'
+//include ':order-ms:infrastructure:persistence'
+//include ':order-ms:infrastructure:adapter'

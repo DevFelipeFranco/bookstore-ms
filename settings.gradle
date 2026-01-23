@@ -1,0 +1,30 @@
+rootProject.name = 'bookstore-ms'
+
+//include 'customer-ms:application'
+//include 'customer-ms:domain'
+//include 'customer-ms:infrastructure:persistence'
+//include 'customer-ms:infrastructure:adapter'
+include 'customer-ms',
+        'customer-ms:domain',
+        'customer-ms:application',
+        'customer-ms:infrastructure:adapter',
+        'customer-ms:infrastructure:persistence'
+
+project(':customer-ms').projectDir = file('customer-ms')
+project(':customer-ms:domain').projectDir = file('customer-ms/domain')
+project(':customer-ms:application').projectDir = file('customer-ms/application')
+project(':customer-ms:infrastructure:adapter').projectDir = file('customer-ms/infrastructure/adapter')
+project(':customer-ms:infrastructure:persistence').projectDir = file('customer-ms/infrastructure/persistence')
+
+//include 'order-ms:domain'
+//include 'order-ms:application'
+include 'order-ms',
+        'order-ms:domain',
+        'order-ms:application'
+
+project(':order-ms').projectDir = file('order-ms')
+project(':order-ms:domain').projectDir = file('order-ms/domain')
+project(':order-ms:application').projectDir = file('order-ms/application')
+
+
+

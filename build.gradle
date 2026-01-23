@@ -1,0 +1,61 @@
+plugins {
+	id 'java'
+//	id 'org.springframework.boot' version '4.0.0'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+allprojects { // Configuraciones comunes a todos los proyectos (raíz + subproyectos)
+	group = 'com.ms.cloud'
+	version = '0.0.1-SNAPSHOT'
+	description = 'Demo project for Spring Boot'
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+//	implementation 'org.springframework.boot:spring-boot-starter'
+//	compileOnly 'org.projectlombok:lombok'
+//	annotationProcessor 'org.projectlombok:lombok'
+//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+subprojects {
+	group = 'com.ms.cloud'
+	version = '0.0.1-SNAPSHOT'
+
+	repositories {
+		mavenCentral()
+	}
+
+	// Apply Java toolchain only to projects that use the java plugin
+	plugins.withId('java') {
+		java {
+			toolchain {
+				languageVersion = JavaLanguageVersion.of(21)
+			}
+		}
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+}

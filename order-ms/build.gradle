@@ -1,0 +1,29 @@
+plugins {
+	id 'java'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.ms.cloud'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+jar {
+	enabled = true
+}
+
+dependencies {
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
