@@ -1,19 +1,20 @@
+/**
+ * Order Microservice - Application Layer
+ * 
+ * Punto de entrada del microservicio.
+ * Implementa los casos de uso orquestando el dominio.
+ */
 plugins {
-    id 'java'
-}
-
-group = 'com.ms.cloud'
-version = '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
+    id 'spring-app-conventions'
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    // Dependencias de módulos internos
+    implementation project(':order-ms:domain')
+    // Cuando se implemente infrastructure:
+    // implementation project(':order-ms:infrastructure:adapter')
 }
 
-test {
-    useJUnitPlatform()
+springBoot {
+    mainClass = 'com.ms.cloud.OrderMsApplication'
 }

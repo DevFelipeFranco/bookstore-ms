@@ -1,43 +1,19 @@
+/**
+ * Customer Microservice - Application Layer
+ * 
+ * Punto de entrada del microservicio.
+ * Implementa los casos de uso orquestando el dominio.
+ */
 plugins {
-    id 'java'
-    id 'org.springframework.boot' version '4.0.0'
-    id 'io.spring.dependency-management'
-}
-
-group = 'com.ms.cloud'
-version = '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
+    id 'spring-app-conventions'
 }
 
 dependencies {
-    implementation project(":customer-ms:domain")
-//    implementation project(':customer-ms:infrastructure:persistence')
+    // Dependencias de módulos internos
+    implementation project(':customer-ms:domain')
     implementation project(':customer-ms:infrastructure:adapter')
-
-    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-    implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 springBoot {
     mainClass = 'com.ms.cloud.CustomerMsApplication'
-}
-//bootJar {
-//    mainClass = 'com.ms.cloud.CustomerMsApplication'
-//}
-
-
-test {
-    useJUnitPlatform()
 }

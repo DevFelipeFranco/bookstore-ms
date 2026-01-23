@@ -1,19 +1,17 @@
+/**
+ * Customer Microservice - Domain Layer
+ * 
+ * Contiene la lógica de negocio pura sin dependencias de frameworks.
+ * - Models (Entities, Value Objects)
+ * - Ports (Use Cases, Repository Interfaces)
+ * - Domain Services
+ * - Exceptions
+ */
 plugins {
-    id 'java'
+    id 'domain-conventions'
 }
 
-group = 'com.ms.cloud'
-version = '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
-
-test {
-    useJUnitPlatform()
-}
+// Dependencias específicas de este módulo domain (si las hubiera)
+// dependencies {
+//     implementation 'alguna:dependencia:version'
+// }

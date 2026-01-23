@@ -1,4 +1,4 @@
-package com.ms.cloud.model;
+package com.ms.cloud.model.valueobject;
 
 import java.math.BigDecimal;
 import java.util.Objects;

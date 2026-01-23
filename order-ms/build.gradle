@@ -1,29 +1,18 @@
+/**
+ * Order Microservice - Parent Module
+ * 
+ * Este módulo actúa como contenedor para los submódulos:
+ * - domain: Lógica de negocio pura
+ * - application: Spring Boot application
+ */
 plugins {
-	id 'java'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
 }
 
 group = 'com.ms.cloud'
 version = '0.0.1-SNAPSHOT'
-description = 'Demo project for Spring Boot'
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
-
-repositories {
-	mavenCentral()
-}
+description = 'Order Microservice'
 
 jar {
-	enabled = true
-}
-
-dependencies {
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
+    enabled = true
 }

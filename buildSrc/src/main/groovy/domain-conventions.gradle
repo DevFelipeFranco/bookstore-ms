@@ -1,0 +1,38 @@
+/**
+ * Convention plugin para módulos DOMAIN
+ * 
+ * Características:
+ * - NO tiene dependencias de Spring Boot
+ * - Solo Java puro + JUnit para tests
+ * - Diseñado para lógica de negocio pura (Hexagonal Architecture)
+ */
+plugins {
+    id 'java-library'
+}
+
+group = 'com.ms.cloud'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Solo testing - SIN Spring Boot
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+jar {
+    enabled = true
+}
+
+test {
+    useJUnitPlatform()
+}

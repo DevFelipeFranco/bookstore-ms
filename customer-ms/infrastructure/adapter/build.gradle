@@ -1,56 +1,15 @@
+/**
+ * Customer Microservice - Infrastructure Adapter Layer
+ * 
+ * Implementa los ports de salida (SPI) del dominio.
+ * Contiene adaptadores para persistencia, APIs externas, etc.
+ */
 plugins {
-    id 'java'
-    id 'org.springframework.boot' version '4.0.0'// Aplicar plugin de Spring Boot
-    id 'io.spring.dependency-management'
-}
-
-group = 'com.ms.cloud'
-version = '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
+    id 'spring-infra-conventions'
 }
 
 dependencies {
-    implementation project(":customer-ms:domain")
-//    implementation project(":customer-ms:application")
-
-    // SPRING BOOT - INFRAESTRUCTURA BÁSICA
-//    implementation 'org.springframework.boot:spring-boot-starter'
-
-    // SPRING DATA JPA - PERSISTENCIA
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-    // BASE DE DATOS - POSTGRESQL
-    runtimeOnly 'org.postgresql:postgresql'
-
-    // MAPEO DE OBJETOS - MAPSTRUCT
-    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
-
-    // VALIDACIÓN
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-
-    // WEB - REST CONTROLLERS
-    'org.springframework.boot:spring-boot-starter-webmvc'
-
-    // ACTUATOR - MONITOREO
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-}
-
-// En build.gradle de módulos que no son aplicaciones Spring Boot
-bootJar {
-    enabled = false
-}
-jar {
-    enabled = true
-    archiveClassifier = ''  // Para evitar el -plain suffix
-}
-
-test {
-    useJUnitPlatform()
+    // Dependencia del domain para implementar los ports
+    implementation project(':customer-ms:domain')
+    implementation libs.bundles.spring.web
 }

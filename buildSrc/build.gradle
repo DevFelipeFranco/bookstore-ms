@@ -1,0 +1,14 @@
+plugins {
+    id 'groovy-gradle-plugin'
+}
+
+repositories {
+    gradlePluginPortal()
+    mavenCentral()
+}
+
+dependencies {
+    // Necesario para usar plugins de Spring Boot en convention plugins
+    implementation 'org.springframework.boot:spring-boot-gradle-plugin:4.0.0'
+    implementation 'io.spring.gradle:dependency-management-plugin:1.1.7'
+}

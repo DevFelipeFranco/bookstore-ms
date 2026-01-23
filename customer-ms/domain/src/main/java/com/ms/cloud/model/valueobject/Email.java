@@ -55,7 +55,7 @@ public record Email(String value) {
                 .filter(EMAIL_PATTERN.asMatchPredicate()) // Validación regex eficiente
                 .map(String::toLowerCase)     // Normalización consistente
                 .findFirst()                  // Convertir Stream a Optional
-                .orElseThrow(() -> new IllegalArgumentException("<INSERT MESSAGE ERROR>"));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email format"));
     }
 
     /**

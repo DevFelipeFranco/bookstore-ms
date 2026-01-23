@@ -1,0 +1,8 @@
+// Settings for buildSrc to access the version catalog from the root project
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            from(files('../gradle/libs.versions.toml'))
+        }
+    }
+}

@@ -1,4 +1,4 @@
-package com.ms.cloud.model;
+package com.ms.cloud.model.valueobject;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
