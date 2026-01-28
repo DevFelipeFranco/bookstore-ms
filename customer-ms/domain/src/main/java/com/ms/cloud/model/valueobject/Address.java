@@ -8,9 +8,9 @@ import java.util.stream.Stream;
  * Value Object que representa una dirección postal completa.
  * Inmutable, validado y normalizado al momento de la creación.
  *
- * @param street Calle y número (ej: "123 Main St")
- * @param city Ciudad (ej: "New York")
- * @param state Estado/Provincia (ej: "NY")
+ * @param street  Calle y número (ej: "123 Main St")
+ * @param city    Ciudad (ej: "New York")
+ * @param state   Estado/Provincia (ej: "NY")
  * @param zipCode Código postal (ej: "10001")
  * @param country País (ej: Country.UNITED_STATES)
  */
@@ -19,8 +19,7 @@ public record Address(
         String city,
         String state,
         String zipCode,
-        Country country
-) {
+        Country country) {
     private static final Pattern ZIP_CODE_PATTERN = Pattern.compile("^[0-9]{5}(?:-[0-9]{4})?$");
     private static final int MIN_FIELD_LENGTH = 2;
     private static final int MAX_FIELD_LENGTH = 100;
@@ -43,8 +42,7 @@ public record Address(
                 validateAndNormalizeField(city, "City"),
                 validateAndNormalizeField(state, "State"),
                 validateAndNormalizeZipCode(zipCode),
-                validateCountry(country)
-        );
+                validateCountry(country));
     }
 
     /**
@@ -76,10 +74,8 @@ public record Address(
                 .filter(v -> v.length() >= MIN_FIELD_LENGTH && v.length() <= MAX_FIELD_LENGTH)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "%s must be between %d and %d characters and cannot be empty".formatted(
-                                fieldName, MIN_FIELD_LENGTH, MAX_FIELD_LENGTH
-                        )
-                ));
+                        "%s must be between %d and %d characters and cannot be empty. Provided: [%s]".formatted(
+                                fieldName, MIN_FIELD_LENGTH, MAX_FIELD_LENGTH, value)));
     }
 
     /**
@@ -96,8 +92,8 @@ public record Address(
                 .filter(ZIP_CODE_PATTERN.asMatchPredicate())
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "Invalid zip code format. Must be 5 digits (US format: 12345 or 12345-6789)"
-                ));
+                        "Invalid zip code format: [%s]. Must be 5 digits (US format: 12345 or 12345-6789)"
+                                .formatted(zipCode)));
     }
 
     /**
@@ -118,8 +114,7 @@ public record Address(
      */
     public String getFullAddress() {
         return "%s, %s, %s %s, %s".formatted(
-                street, city, state, zipCode, country.name()
-        );
+                street, city, state, zipCode, country.name());
     }
 
     /**
@@ -142,7 +137,8 @@ public record Address(
     }
 
     /**
-     * Crea una nueva dirección con la misma información pero diferente código postal.
+     * Crea una nueva dirección con la misma información pero diferente código
+     * postal.
      *
      * @param newZipCode Nuevo código postal
      * @return Nueva instancia de Address con el nuevo código postal
@@ -154,7 +150,6 @@ public record Address(
     @Override
     public String toString() {
         return "Address[street='%s', city='%s', state='%s', zipCode='%s', country='%s']".formatted(
-                street, city, state, zipCode, country.name()
-        );
+                street, city, state, zipCode, country.name());
     }
 }

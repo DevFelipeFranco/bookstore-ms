@@ -6,8 +6,7 @@ import java.util.stream.Stream;
 
 public record Email(String value) {
     private static final Pattern EMAIL_PATTERN = Pattern.compile(
-            "^[A-Za-z0-9+_.-]{1,64}@[A-Za-z0-9.-]{1,255}\\.[A-Za-z]{2,63}$"
-    );
+            "^[A-Za-z0-9+_.-]{1,64}@[A-Za-z0-9.-]{1,255}\\.[A-Za-z]{2,63}$");
     private static final int MAX_LOCAL_PART_LENGTH = 64;
     private static final int MAX_DOMAIN_LENGTH = 255;
 
@@ -42,20 +41,21 @@ public record Email(String value) {
      */
     private static String validateAndNormalize(String email) {
         return Stream.ofNullable(email)
-                .map(String::strip)           // Manejo nulo seguro y trim mejorado
-                .filter(e -> !e.isEmpty())    // Validación de no vacío
-                .filter(e -> {                // Validación de longitud por partes
+                .map(String::strip) // Manejo nulo seguro y trim mejorado
+                .filter(e -> !e.isEmpty()) // Validación de no vacío
+                .filter(e -> { // Validación de longitud por partes
                     int atIndex = e.indexOf('@');
-                    if (atIndex == -1) return false;
+                    if (atIndex == -1)
+                        return false;
                     String localPart = e.substring(0, atIndex);
                     String domain = e.substring(atIndex + 1);
                     return localPart.length() <= MAX_LOCAL_PART_LENGTH &&
                             domain.length() <= MAX_DOMAIN_LENGTH;
                 })
                 .filter(EMAIL_PATTERN.asMatchPredicate()) // Validación regex eficiente
-                .map(String::toLowerCase)     // Normalización consistente
-                .findFirst()                  // Convertir Stream a Optional
-                .orElseThrow(() -> new IllegalArgumentException("Invalid email format"));
+                .map(String::toLowerCase) // Normalización consistente
+                .findFirst() // Convertir Stream a Optional
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email format: " + email));
     }
 
     /**

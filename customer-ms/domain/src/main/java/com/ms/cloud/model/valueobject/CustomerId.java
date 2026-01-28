@@ -17,7 +17,7 @@ public record CustomerId(String value) {
     public CustomerId {
         Objects.requireNonNull(value, "CustomerId value cannot be null");
         if (value.trim().isEmpty()) {
-            throw new IllegalArgumentException("CustomerId cannot be empty");
+            throw new IllegalArgumentException("CustomerId cannot be empty. Provided: " + value);
         }
         value = value.trim();
     }

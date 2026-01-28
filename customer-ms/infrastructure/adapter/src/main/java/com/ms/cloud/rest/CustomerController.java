@@ -29,8 +29,8 @@ public class CustomerController {
         CreateCustomerCommand command = new CreateCustomerCommand(
                 request.firstName(),
                 request.lastName(),
-                request.email(),
                 request.phoneNumber(),
+                request.email(),
                 request.street(),
                 request.city(),
                 request.state(),

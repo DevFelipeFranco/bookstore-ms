@@ -11,5 +11,6 @@ plugins {
 dependencies {
     // Dependencia del domain para implementar los ports
     implementation project(':customer-ms:domain')
+    implementation project(':customer-ms:infrastructure:persistence')
     implementation libs.bundles.spring.web
 }

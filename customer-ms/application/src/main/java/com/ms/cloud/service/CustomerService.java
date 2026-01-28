@@ -13,15 +13,18 @@ import com.ms.cloud.ports.in.command.UpdateCreditLimitCommand;
 import com.ms.cloud.ports.spi.CustomerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class CustomerService implements CreateCustomerUseCase, GetCustomerUseCase, UpdateCreditLimitUseCase,
         PromoteToVipUseCase, UpdateAddressUseCase {
 
     private final CustomerRepository customerRepository;
 
     @Override
+    @Transactional
     public CustomerId execute(CreateCustomerCommand command) {
         Email email = Email.of(command.email());
         if (customerRepository.existsByEmail(email)) {
@@ -53,6 +56,7 @@ public class CustomerService implements CreateCustomerUseCase, GetCustomerUseCas
     }
 
     @Override
+    @Transactional
     public void execute(UpdateAddressCommand command) {
         Customer customer = execute(command.customerId());
 
@@ -68,6 +72,7 @@ public class CustomerService implements CreateCustomerUseCase, GetCustomerUseCas
     }
 
     @Override
+    @Transactional
     public void execute(UpdateCreditLimitCommand command) {
         Customer customer = execute(command.customerId());
 
@@ -90,6 +95,7 @@ public class CustomerService implements CreateCustomerUseCase, GetCustomerUseCas
     }
 
     @Override
+    @Transactional
     public void execute(com.ms.cloud.ports.in.command.PromoteToVipCommand command) {
         Customer customer = execute(command.customerId());
         customer.promoteToVip();

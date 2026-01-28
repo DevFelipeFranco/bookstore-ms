@@ -5,12 +5,29 @@ spring:
   application:
     name: customer-ms
   datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: password
+    master:
+      # Cambiamos el nombre a uno compartido: 'shared_db'
+      jdbc-url: jdbc:h2:mem:shared_db;DB_CLOSE_DELAY=-1
+      driverClassName: org.h2.Driver
+      username: sa
+      password: password
+      pool-name: Master-HikariPool
+    replica:
+      # Apuntamos al MISMO nombre 'shared_db'
+      jdbc-url: jdbc:h2:mem:shared_db;DB_CLOSE_DELAY=-1
+      driverClassName: org.h2.Driver
+      username: sa
+      password: password
+      pool-name: Replica-HikariPool
+    hikari:
+      maximum-pool-size: 20
+      connection-timeout: 3000
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      leak-detection-threshold: 2000
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false # Libera la conexión tan pronto termina el Service
     hibernate:
       ddl-auto: update
   h2:
